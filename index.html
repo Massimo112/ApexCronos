@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulatore di Auto da Corsa</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Collegamento al file CSS esterno -->
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased">
+    <div class="container">
+        <h1 class="text-4xl font-bold text-center mb-8 text-blue-300 main-title">Simulatore di Auto da Corsa</h1>
+
+        <!-- Pulsante per aggiungere un nuovo giro (ora genera un tempo casuale) -->
+        <div class="mb-6 flex justify-center">
+            <button id="addLapBtn"
+                    class="p-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow-md w-full sm:w-auto">
+                Aggiungi Giro Casuale
+            </button>
+        </div>
+
+        <!-- Dashboard dinamica -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-gray-700 p-5 rounded-lg shadow-inner">
+                <h2 class="text-xl font-semibold mb-3 text-blue-200">Statistiche Gara</h2>
+                <p class="text-lg mb-2">Modello Auto: <span id="displayCarModel" class="font-bold text-purple-300">Ferrari F1</span></p>
+                <p class="text-lg mb-2">Pilota: <span id="displayDriverName" class="font-bold text-purple-300">Lewis Hamilton</span></p>
+                <p class="text-lg mb-2">Giri totali: <span id="totalLaps" class="font-bold text-yellow-300">0</span></p>
+                <p class="text-lg">Velocità media: <span id="averageSpeed" class="font-bold text-yellow-300">0.00 km/h</span></p>
+            </div>
+            <div class="bg-gray-700 p-5 rounded-lg shadow-inner">
+                <h2 class="text-xl font-semibold mb-3 text-blue-200">Tempi Migliore/Peggiore</h2>
+                <p class="text-lg mb-2">Tempo migliore: <span id="bestLapTime" class="font-bold text-green-400">N/A</span></p>
+                <p class="text-lg">Tempo peggiore: <span id="worstLapTime" class="font-bold text-red-400">N/A</span></p>
+            </div>
+        </div>
+
+        <!-- Lista dei tempi sul giro -->
+        <div class="bg-gray-700 p-5 rounded-lg shadow-inner mb-6">
+            <h2 class="text-xl font-semibold mb-3 text-blue-200">Tempi sul Giro</h2>
+            <ul id="lapTimesList" class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                <!-- I tempi sul giro verranno aggiunti qui dinamicamente -->
+            </ul>
+        </div>
+
+        <!-- Pulsante per resettare la gara -->
+        <button id="resetRaceBtn"
+                class="w-full p-3 bg-gradient-to-r from-red-500 to-orange-600 text-white font-semibold rounded-lg shadow-md">
+            Resetta Gara
+        </button>
+    </div>
+
+    <!-- Collegamento al file JavaScript esterno -->
+    <script src="script.js"></script>
+</body>
+</html>
