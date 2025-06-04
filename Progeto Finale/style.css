@@ -1,0 +1,218 @@
+body {
+    font-family: 'Inter', sans-serif;
+    /* Sfondo sfumato dinamico più vario con colori più intensi */
+    background: linear-gradient(45deg, #0a0a1a, #1a0a2a, #0a0a1a, #2a0a3a, #1a0a2a, #0a0a1a);
+    background-size: 800% 800%; /* Aumentato per un movimento più ampio e fluido */
+    animation: gradientBackground 25s ease infinite alternate; /* Animazione più lenta e alternata */
+    color: #e2e8f0; /* Testo chiaro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden; /* Nasconde le barre di scorrimento causate da animazioni fuori schermo */
+}
+@keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.container {
+    background-color: #1f1f3f; /* Sfondo leggermente più chiaro per il contenitore */
+    padding: 32px;
+    border-radius: 20px; /* Bordi più arrotondati */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Ombra molto più pronunciata */
+    width: 100%;
+    max-width: 650px;
+    border: 2px solid #6a0dad; /* Bordo viola intenso */
+    position: relative;
+    overflow: hidden;
+    transform: scale(0.95); /* Iniziale leggero rimpicciolimento per animazione di ingresso */
+    animation: containerEntry 0.8s ease-out forwards;
+}
+@keyframes containerEntry {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+.container::before, .container::after {
+    content: '';
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(170, 0, 255, 0.2) 0%, transparent 60%); /* Luce viola elettrica */
+    z-index: 0;
+    opacity: 0.6;
+    border-radius: 50%;
+}
+.container::before {
+    top: -70%; left: -70%;
+    width: 250%; height: 250%;
+    animation: rotateLight 30s linear infinite;
+}
+.container::after {
+    bottom: -70%; right: -70%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.15) 0%, transparent 60%); /* Luce ciano */
+    animation: rotateLightReverse 25s linear infinite;
+}
+@keyframes rotateLight {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+@keyframes rotateLightReverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/* Assicurati che tutti gli elementi interni siano sopra l'animazione di sfondo del container */
+.container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Animazione per il titolo principale */
+.main-title {
+    animation: pulseGlow 1.8s infinite alternate; /* Animazione più veloce */
+    font-weight: 900; /* Ancora più grassetto */
+}
+@keyframes pulseGlow {
+    from { text-shadow: 0 0 8px rgba(138, 43, 226, 0.6), 0 0 15px rgba(138, 43, 226, 0.4); }
+    to { text-shadow: 0 0 15px rgba(138, 43, 226, 1), 0 0 30px rgba(138, 43, 226, 0.8); }
+}
+
+.lap-item.new-lap {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98); /* Maggiore spostamento e leggero scale */
+    animation: fadeInSlideUp 0.7s ease-out forwards; /* Animazione più lunga */
+}
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+.best-time {
+    color: #00ff00; /* Verde lime */
+    font-weight: 900; /* Ancora più grassetto */
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.9); /* Ombra testo più intensa */
+}
+.worst-time {
+    color: #ff4500; /* Rosso arancio */
+    font-weight: 900; /* Ancora più grassetto */
+    text-shadow: 0 0 10px rgba(255, 69, 0, 0.9); /* Ombra testo più intensa */
+}
+/* Stile per il messaggio temporaneo */
+.message-box {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700; /* Più grassetto */
+    z-index: 1000;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Ombra più pronunciata */
+    animation: fadeOut 3.5s forwards; /* Animazione più lunga */
+    opacity: 0; /* Inizia invisibile */
+    border: 1px solid;
+}
+.message-box.success {
+    background-color: #00b300; /* Verde più scuro */
+    color: white;
+    border-color: #00e600;
+}
+.message-box.error {
+    background-color: #cc0000; /* Rosso più scuro */
+    color: white;
+    border-color: #ff0000;
+}
+.message-box.info {
+    background-color: #007bff; /* Blu info */
+    color: white;
+    border-color: #0099ff;
+}
+@keyframes fadeOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); } /* Entra dall'alto con più spostamento */
+    10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); } /* Esce verso l'alto */
+}
+
+/* Stili aggiuntivi per i pulsanti e le sezioni per un look più "premium" */
+button {
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Curva di transizione più fluida */
+    border: none;
+    outline: none;
+    background-image: linear-gradient(45deg, var(--tw-gradient-from), var(--tw-gradient-to));
+    font-weight: 800; /* Testo più grassetto sui pulsanti */
+    letter-spacing: 0.05em; /* Spaziatura lettere */
+    text-transform: uppercase; /* Testo maiuscolo */
+}
+#addLapBtn {
+    --tw-gradient-from: #4299e1; /* Blu più chiaro */
+    --tw-gradient-to: #8a2be2; /* Viola bluastro */
+}
+#resetRaceBtn {
+    --tw-gradient-from: #e53e3e; /* Rosso più chiaro */
+    --tw-gradient-to: #ff4500; /* Rosso arancio */
+}
+button:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Ombra più grande */
+    transform: translateY(-6px) scale(1.05); /* Spostamento e scala più pronunciati */
+    filter: brightness(1.2); /* Leggero bagliore */
+}
+button:active {
+    transform: translateY(0) scale(0.95); /* Effetto "spinta" più marcato */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    filter: brightness(0.9);
+}
+
+.bg-gray-700 { /* Rinominate le classi per coerenza con il nuovo colore */
+    background-color: #2a2a4a; /* Sfondo leggermente più scuro per le sezioni (viola scuro) */
+    border: 1px solid #9932cc; /* Bordo viola scuro per le sezioni */
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.5s ease;
+}
+.bg-gray-700:hover {
+    transform: translateY(-8px); /* Sollevamento più pronunciato */
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2), 0 15px 35px rgba(0, 0, 0, 0.5); /* Ombra più grande */
+    border-color: #ee82ee; /* Bordo viola chiaro al hover */
+}
+.text-blue-300 {
+    color: #9370db; /* Viola medio per i titoli */
+}
+.text-blue-200 {
+    color: #b088f5; /* Viola più chiaro per i sottotitoli */
+}
+.text-purple-300 {
+    color: #d8bfd8; /* Viola lavanda per i dettagli auto/pilota */
+}
+.text-yellow-300 {
+    color: #ffeb3b; /* Giallo brillante per le statistiche */
+}
+.lap-item {
+    background-color: #3a3a5a; /* Sfondo per gli elementi della lista (viola scuro) */
+    transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+.lap-item:hover {
+    background-color: #5a3a7a; /* Cambia colore al hover (viola più chiaro) */
+    transform: translateX(8px) scale(1.01); /* Spostamento laterale e leggero scale */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.lap-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: all 0.5s ease;
+}
+.lap-item:hover::before {
+    left: 100%;
+}
